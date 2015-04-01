@@ -1,0 +1,29 @@
+Determine if a Sudoku is valid, according to: Sudoku Puzzles - The Rules.
+
+The Sudoku board could be partially filled, where empty cells are filled with the character '.'.
+
+Note:
+A valid Sudoku board (partially filled) is not necessarily solvable. Only the filled cells need to be validated.
+
+#由于hashtable的key只有1-9，因此可以优化哈希，用位表示，仅用三个hashtables即可
+
+class Solution:
+    # @param board, a 9x9 2D array
+    # @return a boolean
+    def isValidSudoku(self, board):
+        row=[0]*9
+        col=[0]*9
+        blo=[0]*9
+        for i in xrange(9):
+            for j in xrange(9):
+                if board[i][j]!='.':
+                    bit=1<<int(board[i][j])
+                    k=(i/3)*3+j/3
+                    if row[j]&bit or col[i]&bit or blo[k]&bit:
+                        return False
+                    else:
+                        row[j]|=bit
+                        col[i]|=bit
+                        blo[k]|=bit
+        return True
+                        
