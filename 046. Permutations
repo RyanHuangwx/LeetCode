@@ -1,0 +1,28 @@
+Given a collection of numbers, return all possible permutations.
+
+For example,
+[1,2,3] have the following permutations:
+[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], and [3,2,1].
+
+
+class Solution:
+    # @param num, a list of integer
+    # @return a list of lists of integers
+    def perIterator(self,num):
+        l=len(num)
+        for i in xrange(l):
+            v=num[i]
+            if l==1:
+                yield [v]
+            rest=num[:i]+num[i+1:]
+            for i in self.perIterator(rest):
+                yield [v]+i
+            
+        
+    def permute(self, num):
+        if not num:
+            return [[]]
+        res=[]
+        for i in self.perIterator(num):
+            res.append(i)
+        return res
