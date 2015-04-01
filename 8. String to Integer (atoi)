@@ -1,0 +1,32 @@
+Implement atoi to convert a string to an integer.
+
+Hint: Carefully consider all possible input cases. If you want a challenge, please do not see below and ask yourself what are the possible input cases.
+
+Notes: It is intended for this problem to be specified vaguely (ie, no given input specs). You are responsible to gather all the input requirements up front.
+
+class Solution:
+    # @return an integer
+    def atoi(self, str):
+        str=str.lstrip()
+        if str=='':
+            return 0
+        sign=1
+        if str[0]=='-':
+            sign=0
+            str=str[1:]
+        elif str[0]=='+':
+            str=str[1:]
+        s=0
+        MaxSize=2**31-sign
+        while str:
+            if str[0].isdigit():
+                if s==MaxSize/10 and int(str[0])<=MaxSize%10 or s<MaxSize/10:
+                    s=s*10+int(str[0])
+                else:
+                    return MaxSize if sign==1 else -MaxSize
+                str=str[1:]
+            else:
+                return s if sign else -s
+        
+        return s if sign else -s
+        
