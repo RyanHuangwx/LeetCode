@@ -1,0 +1,25 @@
+Given preorder and inorder traversal of a tree, construct the binary tree.
+
+Note:
+You may assume that duplicates do not exist in the tree.
+
+
+# Definition for a  binary tree node
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    # @param preorder, a list of integers
+    # @param inorder, a list of integers
+    # @return a tree node
+    def buildTree(self, preorder, inorder):
+        if not preorder:
+            return None
+        val=preorder.pop(0)
+        root=TreeNode(val)
+        root.left=self.buildTree(preorder,inorder[:inorder.index(val)]) if val!=inorder[0] else None
+        root.right=self.buildTree(preorder,inorder[inorder.index(val)+1:]) if val!=inorder[-1] else None
+        return root
