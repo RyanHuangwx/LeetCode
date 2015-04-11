@@ -1,0 +1,18 @@
+Given a list of non negative integers, arrange them such that they form the largest number.
+
+For example, given [3, 30, 34, 5, 9], the largest formed number is 9534330.
+
+Note: The result may be very large, so you need to return a string instead of an integer.
+
+class Solution:
+    # @param num, a list of integers
+    # @return a string
+    def cmpInt(self,a,b):
+        return -1 if str(a)+str(b)<str(b)+str(a) else 1
+        
+    def largestNumber(self, num):
+        if max(num)==0:
+            return '0'
+        return ''.join(str(i) for i in sorted(num,cmp=self.cmpInt,reverse=True))
+        
+        #注意sort的用法：L.sort(cmp=None, key=None, reverse=False) -- stable sort *IN PLACE*; cmp(x, y) -> -1, 0, 1
