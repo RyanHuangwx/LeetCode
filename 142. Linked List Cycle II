@@ -1,0 +1,27 @@
+Given a linked list, return the node where the cycle begins. If there is no cycle, return null.
+
+1、快慢指针，相遇时step K =n*r (r为环结点数)
+2、相遇点 to cycleStart == head to cycleStart
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    # @param head, a ListNode
+    # @return a list node
+    def detectCycle(self, head):
+        fast=slow=head
+        while fast and fast.next:
+            fast=fast.next.next
+            slow=slow.next
+            if slow==fast:
+                p1,p2=head,slow
+                while p1!=p2:
+                    p1=p1.next
+                    p2=p2.next
+                return p1
+        return None
+
