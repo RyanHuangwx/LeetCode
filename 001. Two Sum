@@ -20,8 +20,11 @@ class Solution:
         :rtype: List[int]
         """
         res = dict()
+        # 遍历数组
         for index,value in enumerate(nums):
+            # 查找hash表，如找到，则返回下标
             if target-value in res:
                 return [res[target-value], index]
+            # 如不存在，把当前元素值和对应下标存入hash表
             else:
                 res[value] = index
